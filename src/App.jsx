@@ -3,19 +3,11 @@ import Categories from '../src/Categories/Categories.jsx'
 import Menu from "./Menu/Menu"
 import menuList from '../src/data';
 
+const arrayOfCategories = ["all",...new Set(menuList.map(item => item.category))];
 export default function App() {
-  const [menuItems, setMenuItems] = useState([])
+
+  const [menuItems, setMenuItems] = useState(arrayOfCategories)
   const [categoryName, setCategoryName] = useState("all")
-  let arrayOfCategories = []
-  console.log("app component")
-  useEffect(() => {
-    menuList.forEach(item => {
-      arrayOfCategories.push(item.category)
-    })
-    const uniqueSet = new Set(arrayOfCategories);
-    const uniqueArray = [...uniqueSet];
-    setMenuItems(uniqueArray)
-  }, [])
 
   const categoryHandler=useCallback((category)=>{
     setCategoryName(category)

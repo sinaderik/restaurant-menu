@@ -1,8 +1,7 @@
 import { React, useState,memo } from 'react'
 
-export default function Categories({ items,categoryChanger }) {
-  const [clickBtn, setClickBtn] = useState("");
-  console.log("Categories component")
+function Categories({ items,categoryChanger }) {
+  const [clickBtn, setClickBtn] = useState("all");
 
   const categoryHandler=(item)=>{
     categoryChanger(item)
@@ -11,14 +10,6 @@ export default function Categories({ items,categoryChanger }) {
 
   return (
     <div className="btn-container" style={{ marginTop: "0.5rem" }}>
-      <button
-        onClick={() => categoryHandler("all")}
-        type="button"
-        // highlight class  for highlight main category
-        className={clickBtn === "all" ? "filter-btn highlight" : "filter-btn"}
-      >
-        All
-      </button>
       {items.map((item, index) => {
         return <button
           onClick={() => categoryHandler(item)}
@@ -28,3 +19,5 @@ export default function Categories({ items,categoryChanger }) {
     </div>
   );
 }
+
+export default memo(Categories)
